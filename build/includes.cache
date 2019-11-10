@@ -1,0 +1,47 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/home/shadows/.arduino15/packages/arduino/hardware/avr/1.8.1/cores/arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "/home/shadows/.arduino15/packages/arduino/hardware/avr/1.8.1/variants/mega"
+  },
+  {
+    "Sourcefile": "/home/shadows/caja_fuerte/build/sketch/caja_fuerte.ino.cpp",
+    "Include": "Keypad.h",
+    "Includepath": "/home/shadows/Arduino/libraries/Keypad/src"
+  },
+  {
+    "Sourcefile": "/home/shadows/caja_fuerte/build/sketch/caja_fuerte.ino.cpp",
+    "Include": "LiquidCrystal.h",
+    "Includepath": "/home/shadows/Arduino/libraries/LiquidCrystal/src"
+  },
+  {
+    "Sourcefile": "/home/shadows/caja_fuerte/build/sketch/caja_fuerte.ino.cpp",
+    "Include": "EEPROM.h",
+    "Includepath": "/home/shadows/.arduino15/packages/arduino/hardware/avr/1.8.1/libraries/EEPROM/src"
+  },
+  {
+    "Sourcefile": "/home/shadows/caja_fuerte/build/sketch/caja_fuerte.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/shadows/Arduino/libraries/Keypad/src/Key.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/shadows/Arduino/libraries/Keypad/src/Keypad.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "/home/shadows/Arduino/libraries/LiquidCrystal/src/LiquidCrystal.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]
