@@ -11,19 +11,19 @@
 
 
 
-// ========== Configuración del teclado ==========
-//              ---------------------    
-//              | ARDUINO | TECLADO |
-//              |---------|---------|
-//              |   19    |    1    |
-//              |   21    |    2    |
-//              |   23    |    3    |
-//              |   25    |    4    |
-//              |   27    |    5    |
-//              |   29    |    6    |
-//              |   31    |    7    |
-//              ---------------------
-// ===============================================
+// ===== Configuración del teclado =====
+//         ---------------------    
+//         | ARDUINO | TECLADO |
+//         |---------|---------|
+//         |   19    |    1    |
+//         |   21    |    2    |
+//         |   23    |    3    |
+//         |   25    |    4    |
+//         |   27    |    5    |
+//         |   29    |    6    |
+//         |   31    |    7    |
+//         ---------------------
+// =====================================
 
 // Se define el tamaño del teclado: 4 filas y 3 columnas
 const byte ROWS = 4; const byte COLS = 3;   
@@ -47,28 +47,28 @@ Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 
 
-// ========= Configuración de la pantalla =========
-//              ---------------------    
-//              | ARDUINO | PANTALLA |
-//              |---------|----------|
-//              |   GND   |    VSS   |
-//              |   5V    |    VDD   |
-//              |         |    VO    |
-//              |   33    |    RS    |
-//              |   GND   |    RW    |
-//              |   35    |    E     |
-//              |         |    D0    |
-//              |         |    D1    |
-//              |         |    D2    |
-//              |         |    D3    |
-//              |   37    |    D4    |
-//              |   39    |    D5    |
-//              |   41    |    D6    |
-//              |   43    |    D7    |
-//              |   5v    |    A     |
-//              |   GND   |    K     |
-//              ----------------------
-// ================================================
+// ===== Configuración de la pantalla =====
+//         ---------------------    
+//         | ARDUINO | PANTALLA |
+//         |---------|----------|
+//         |   GND   |    VSS   |
+//         |   5V    |    VDD   |
+//         |         |    VO    |
+//         |   33    |    RS    |
+//         |   GND   |    RW    |
+//         |   35    |    E     |
+//         |         |    D0    |
+//         |         |    D1    |
+//         |         |    D2    |
+//         |         |    D3    |
+//         |   37    |    D4    |
+//         |   39    |    D5    |
+//         |   41    |    D6    |
+//         |   43    |    D7    |
+//         |   5v    |    A     |
+//         |   GND   |    K     |
+//         ----------------------
+// ======================================
 
 // Se establecen los pines que estaran conectados
 byte rs = 33, en = 35, d4 = 37, d5 = 39, d6 = 41, d7 = 43;
@@ -77,7 +77,7 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 
 
-// ============ Configuraciones extras ============
+// ===== Configuraciones extras =================== 
 // Se establecen otros pines que seran utilizados 
 // ================================================
 
@@ -95,7 +95,7 @@ const byte PIN_RELE_ALARMA     = 34;
 
 
 
-// ===============VARIABLES GLOBALES===============
+// ===== Variables Globales =======================
 // Estas son las variables que se utilizan en todo 
 // el codigo, para manejar el flujo del programa.
 // ================================================
@@ -139,7 +139,7 @@ byte intentos               = 0;
 
 
 
-// =============== Función Inicial ================
+// ===== Función Inicial ==========================
 // Se ejecuta una sola vez durante el inicio. Se 
 // definen la configuración de los pines. Se inicia 
 // la pantalla y el puerto serial.
@@ -177,7 +177,7 @@ void setup() {
 
 
 
-// ============== Función Principal ===============
+// ===== Función Principal ======================== 
 // Se ejecuta indefinidamente tras terminar la 
 // funcion inicial. Se encarga de cambiar entre los
 // distintos modos del sistema. Lee las direcciones
@@ -276,7 +276,7 @@ void loop() {
 
 
 
-// ============== Funciones de texto ====================================================
+// ===== Funciones de texto =============================================================
 //  Dedicadas al texto e información almacenada:
 //  -> textoPreInicio        - Muestra por serial y por LCD el mensaje de introduccion. 
 //  -> textoNuevoPin     - Muestra por el LCD el mensaje de nuevo pin.
@@ -350,18 +350,19 @@ void leerEEPROMPin() {
     Serial.println();   
 }
 
-/*  Funciones para control del LCD:
- *    limpiarLCD        - Limpia todos los caracteres en el LCD.
- *    escribirLCD       - Fija posicion y escribe texto.
- *    escribirBinLCD    - Identico a writeLCD pero recibe texto en formato ASCII.
- */
+
+
+
+//  ===== Funciones del LCD =============================================================
+//  Controlan la pantalla LCD para escribir/borrar.
+//  -> limpiarLCD        - Limpia todos los caracteres en el LCD.
+//  -> escribirLCD       - Fija posicion y escribe texto.
+//  -> escribirBinLCD    - Identico a writeLCD pero recibe texto en formato ASCII.
+// ======================================================================================
 
 void limpiarLCD() {
-    for(byte x = 0; x <= 15; x++) {
-        for(byte y = 0; y <= 1; y++) {
-            escribirLCD(x, y, " "); 
-        } 
-    }
+    escribirLCD(0, 0, "                "); 
+    escribirLCD(0, 1, "                "); 
 }
 
 void escribirLCD(byte x, byte y, const char* txt) {
@@ -374,60 +375,17 @@ void escribirBinLCD(byte x, byte y, byte txt) {
     lcd.write(txt); 
 }
 
-/*  Funciones para control del Pin:
- *    teclaSerial         - Muestra por serial la tecla persionada en el teclado. 
- *    verificarPin        - Comprueba si el pin de memoria es igual al pin de la EEPROM. 
- *    guardarEEPROMPin    - Guarda el pin almacenado en memoria en la EEPROM.
- *    limpiarMemoriaPin   - Limppia el pin almacenado en memoria.
- * 
- */
 
-void controlLeds(byte leds, bool estado) {
-    switch (leds) {
-        case 0:
-            digitalWrite(PIN_LED_1, LOW);   digitalWrite(PIN_LED_2, LOW);   digitalWrite(PIN_LED_3, LOW);   digitalWrite(PIN_LED_4, LOW);   digitalWrite(PIN_LED_5, LOW);
-            break;
 
-        case 1:
-            digitalWrite(PIN_LED_1, HIGH);  digitalWrite(PIN_LED_2, LOW);   digitalWrite(PIN_LED_3, LOW);   digitalWrite(PIN_LED_4, LOW);   digitalWrite(PIN_LED_5, LOW);
-            break;
-        
-        case 2:
-            digitalWrite(PIN_LED_1, HIGH);  digitalWrite(PIN_LED_2, HIGH);  digitalWrite(PIN_LED_3, LOW);   digitalWrite(PIN_LED_4, LOW);   digitalWrite(PIN_LED_5, LOW);
-            break;
-        
-        case 3:
-            digitalWrite(PIN_LED_1, HIGH);  digitalWrite(PIN_LED_2, HIGH);  digitalWrite(PIN_LED_3, HIGH);  digitalWrite(PIN_LED_4, LOW);   digitalWrite(PIN_LED_5, LOW);
-            break;
-        
-        case 4:
-            digitalWrite(PIN_LED_1, HIGH);  digitalWrite(PIN_LED_2, HIGH);  digitalWrite(PIN_LED_3, HIGH);  digitalWrite(PIN_LED_4, HIGH);  digitalWrite(PIN_LED_5, LOW);
-            break;
-        
-        case 5:
-            digitalWrite(PIN_LED_1, HIGH);  digitalWrite(PIN_LED_2, HIGH);  digitalWrite(PIN_LED_3, HIGH);  digitalWrite(PIN_LED_4, HIGH);  digitalWrite(PIN_LED_5, HIGH);
-            break;
-        
-        case 6:
-            if (estado == true) {
-                digitalWrite(PIN_LED_PUERTA, HIGH);     digitalWrite(PIN_LED_ALARMA, LOW);
-                controlLeds(5, true);
-            } else {
-                digitalWrite(PIN_LED_PUERTA, LOW);
-            }
-            break;
 
-        case 7:
-            if (estado == true) {                
-                digitalWrite(PIN_LED_PUERTA, LOW);     digitalWrite(PIN_LED_ALARMA, HIGH);                
-                controlLeds(0, true);
-            } else {
-                digitalWrite(PIN_LED_ALARMA, LOW);
-            }
-            
-            break;
-    }
-}
+
+// ===== Funciones de Pin ===============================================================
+// Dedicadas a controlar datos del pin.
+// -> teclaSerial         - Muestra por serial la tecla persionada en el teclado. 
+// -> verificarPin        - Comprueba si el pin de memoria es igual al pin de la EEPROM. 
+// -> guardarEEPROMPin    - Guarda el pin en memoria hacia la EEPROM.
+// -> limpiarMemoriaPin   - Limpia el pin almacenado en memoria.
+// ======================================================================================
 
 void teclaSerial(byte texto) {    
     Serial.print(F("Tecla: "));
@@ -472,12 +430,20 @@ void limpiarMemoriaPin() {
     pinX = 0;
 }
 
-/*  Modos de funcionamiento de la caja fuerte:
- *    modoNuevoPIN      - Utilizado para guardar un nuevo pin en la memoria eeprom.
- *    modoIngresarPin   - Permite acceder a la caja fuerte si cumple los controles de pin e intentos. 
- *    modoCajaAbierta   - Permite cambiar la contraseña, cerrar la puerta con un boton o un cierre automatico tras 60 segundos.
- *    modoAlarma        - Empieza a sonar la alarma y pide el codigo puk para desbloquear.
- */
+
+
+
+// ===== Modos Internos =================================================================
+// Son todas las funciones internas del programa
+// -> modoNuevoPIN      - Utilizado para guardar un nuevo pin en la memoria eeprom.
+// -> modoIngresarPin   - Permite acceder a la caja fuerte si cumple los controles de pin 
+//                        e intentos. 
+// -> modoCajaAbierta   - Permite cambiar la contraseña, cerrar la puerta con un boton o 
+//                        un cierre automatico tras cinco min.
+// -> modoAlarma        - Empieza a sonar la alarma y pide el codigo puk para desbloquear.
+// -> modoComienzo      - Activa el modo de programador o inicia la caja fuerte
+// -> modoProgramador   - Ejecuta comandos para configurar la caja
+// ======================================================================================
 
 bool modoNuevoPin() {
     // Comprueba si se esta recibiendo un nuevo caracter por el teclado
@@ -640,11 +606,6 @@ bool modoCajaAbierta() {
 bool modoAlarma() {
     return false;
 }
-
-
-/*  Funciones para el modo de programador.
- *    modoComienzo      - Activa el modo de programador 
- */
 
 bool modoComienzo() {
     // Clave especial
